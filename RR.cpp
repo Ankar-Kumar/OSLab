@@ -15,7 +15,7 @@ void solve()
     for (int i = 0; i < n; i++)
     {
         cout << "p[" << i + 1 << "]: ";
-        cin >> v[i];
+        cin >> v[i];//burst time
         tmp[i] = v[i];
         totalBurst += v[i];
     }
@@ -27,7 +27,7 @@ void solve()
 
         for (int i = 0; i < n; i++)
         {
-            if (v[i] <= t_quantum && v[i] != 0)
+            if (v[i] <= t_quantum && v[i] > 0)
             {
                 ans.push_back(i + 1);
                 wt[i] += b - check[i];

@@ -2,15 +2,16 @@
 
 #define MAX_PROCESS 100
 using namespace std;
-struct process {
+struct Process
+{
     int pid;
     int burst_time;
     int waiting_time;
 };
 
-typedef struct process Process;
+// typedef struct process ;
 double average_waiting_time;
-int total_waiting_time;
+double total_waiting_time;
 int ind[100],tat[100];
 
 int compare(Process a, Process b)
@@ -97,7 +98,7 @@ int main()
     sort(p,p+n,compare);
     WaitingTime(p, n);
 
-    average_waiting_time = (double) ( (double)total_waiting_time / (double) n );
+    average_waiting_time =total_waiting_time /n;
 
     puts("");
     printf("Average Waiting Time: %.2lf\n",average_waiting_time);
