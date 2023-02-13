@@ -1,88 +1,129 @@
-#include<bits/stdc++.h>
-#define ll long long
-#define lpr pair<long long int,long long int>
-#define S second
-#define F first
-#define pb push_back
-#define n1 '\n'
+#include <bits/stdc++.h>
+#include <windows.h>
+#include <dirent.h>
+// #include <experimental/filesystem>
 
+// namespace fs = std::experimental::filesystem;
 using namespace std;
+void createFile(char filename[])
+{
+    fstream file;
+    file.open(filename, ios::out);
+    if (!file)
+    {
+        cout << "Error in creating file!!!";
+    }
+    else
+        cout << "File created" << endl;
+    file.close();
+}
 
- typedef pair<int,int>P;
+void deleteFile(char filename[])
+{
+    int status;
+    status = remove(filename);
+    if (status == 0)
+        cout << "File is deleted" << endl;
+    else
+        cout << "File does not deleted" << endl;
+}
 
+void renameFile(char oldname[], char newname[])
+{
+    if (rename(oldname, newname) == 0)
+    {
+        cout << "File renamed successfully." << endl;
+    }
+    else
+        perror("Error");
+}
 
- void solve(){
+void copyFile(char source[], char destination[])
+{
+    if (CopyFile(source, destination, true))
+    {
+        cout << "File copied successfully." << endl;
+    }
+    else
+        cout << "Error occured." << endl;
+}
 
-     vector<pair<int,pair<string,int>>>pr;
-     int n;
-     cin>>n;
-     int last_arrival=0;
-     for(int i=0;i<n;i++){
-        string s;
-        int burst_t,arrival_t;
+void moveFile(char source[], char destination[])
+{
+    if (CopyFile(source, destination, true))
+    {
+        int status = remove(source);
+        cout << "File moved successfully." << endl;
+    }
+    else
+        cout << "Error occured." << endl;
+}
 
-        cin>>s>>arrival_t>>burst_t;
-        pr.pb(make_pair(burst_t,make_pair(s,arrival_t)));
-        last_arrival=arrival_t;
-     }
+void dirFile()
+{
+    struct dirent *d;
+    DIR *dr;
+    dr = opendir(".");
+    if (dr != NULL)
+    {
+        cout << "List of Files and Folders:-\n";
+        while ((d = readdir(dr)) != NULL)
+            cout << d->d_name << endl;
+        closedir(dr);
+    }
+    else
+        cout << "\nError Occurred!";
+    cout << endl;
+}
 
-     //for(int i=0; i<pr.size(); i++) cout<<pr[i].F<<" "<<pr[i].S.F<<" "<<pr[i].S.S<<endl;
+int compare(char a[], char b[])
+{
+    for (int i = 0; a[i] != '\0'; i++)
+    {
+        if (a[i] != b[i])
+            return 0;
+    }
+    return 1;
+}
 
-     priority_queue<P,vector<P>,greater<P> >pq;
-     vector<int>ans;
-     int index=0;
-
-     for(int i=0;i<=last_arrival;i++){
-        if(pr[index].S.S==i){
-            pq.push(make_pair(pr[index].F,index));
-            index++;
+int main(int argc, char **argv)
+{
+    if (argc == 1)
+    {
+        cout << "No command inputed." << endl;
+    }
+    else
+    {
+        char create[] = "create";
+        char del[] = "delete";
+        char mov[] = "move";
+        char ren[] = "rename";
+        char cp[] = "copy";
+        char dr[] = "dir";
+        if (compare(argv[1], create))
+        {
+            createFile(argv[2]);
         }
-        pair<int,int>top=pq.top();
-        pq.pop();
-        ans.pb(top.S);
-        top.F--;
-        if(top.F>0){
-            pq.push(make_pair(top.F,top.S));
+        else if (compare(argv[1], del))
+        {
+            deleteFile(argv[2]);
         }
-     }
-
-     while(pq.size()){
-        pair<int,int>top=pq.top();
-        pq.pop();
-        ans.pb(top.S);
-        top.F--;
-        if(top.F>0){
-            pq.push(make_pair(top.F,top.S));
+        else if (compare(argv[1], mov))
+        {
+            moveFile(argv[2], argv[3]);
         }
-     }
-     for(int i=0;i<ans.size();i++)
-     {
-       cout<<" -- ";
-     }
-     cout<<n1;
-
-     for(int i=0;i<ans.size();i++){
-       cout<<" "<<pr[ans[i]].S.F<<" ";
-
-     }
-     cout<<n1;
-     for(int i=0;i<ans.size();i++)
-     {
-         cout<<" -- ";
-
-     }
-     cout<<n1;
-     for(int i=0; i<ans.size();i++){
-        if(i<9) cout<<i<<"   ";
-        else cout<<i<<"  ";
-     }
-     cout<<ans.size()<<n1;
- }
- int main()
- {
-
-     int t=1;
-     while(t--){
-        solve();
-     }
- }
+        else if (compare(argv[1], ren))
+        {
+            renameFile(argv[2], argv[3]);
+        }
+        else if (compare(argv[1], cp))
+        {
+            copyFile(argv[2], argv[3]);
+        }
+        else if (compare(argv[1], dr))
+        {
+            dirFile();
+        }
+    }
+}
+//  F:/3Y2S/OS/LAB/task1/l2.txt      F:/3Y2S/OS/LAB/task1/copy/l2.txt
