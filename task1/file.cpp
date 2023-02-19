@@ -5,7 +5,7 @@
 
 // namespace fs = std::experimental::filesystem;
 using namespace std;
-void createFile(char filename[])
+void createFile(string filename)
 {
     fstream file;
     file.open(filename, ios::out);
@@ -63,29 +63,17 @@ void dirFile()
 {
     struct dirent *d;
     DIR *dr;
-    dr = opendir(".");
-    if (dr != NULL)
-    {
-        cout << "List of Files and Folders:-\n";
-        while ((d = readdir(dr)) != NULL)
-            cout << d->d_name << endl;
+    dr=opendir(".");
+    if(dr!=NULL){
+        cout<<"folders are "<<endl;
+        while((d=readdir(dr))!=NULL){
+            cout<<d->d_name<<endl;            
+        }
         closedir(dr);
+    }else{
+        cout<<"no file"<<endl;
     }
-    else
-        cout << "\nError Occurred!";
-    cout << endl;
 }
-
-int compare(char a[], char b[])
-{
-    for (int i = 0; a[i] != '\0'; i++)
-    {
-        if (a[i] != b[i])
-            return 0;
-    }
-    return 1;
-}
-
 int main(int argc, char **argv)
 {
     if (argc == 1)
@@ -94,33 +82,33 @@ int main(int argc, char **argv)
     }
     else
     {
-        char create[] = "create";
-        char del[] = "delete";
-        char mov[] = "move";
-        char ren[] = "rename";
-        char cp[] = "copy";
-        char dr[] = "dir";
-        if (compare(argv[1], create))
+        string create = "create";
+        string del = "delete";
+        string mov = "move";
+        string ren = "rename";
+        string cp = "copy";
+        string dr = "ls";
+        if (argv[1]==create)
         {
             createFile(argv[2]);
         }
-        else if (compare(argv[1], del))
+        else if (argv[1]==del)
         {
             deleteFile(argv[2]);
         }
-        else if (compare(argv[1], mov))
+        else if (argv[1]== mov)
         {
             moveFile(argv[2], argv[3]);
         }
-        else if (compare(argv[1], ren))
+        else if (argv[1]==ren)
         {
             renameFile(argv[2], argv[3]);
         }
-        else if (compare(argv[1], cp))
+        else if (argv[1]==cp)
         {
             copyFile(argv[2], argv[3]);
         }
-        else if (compare(argv[1], dr))
+        else if (argv[1]== dr)
         {
             dirFile();
         }

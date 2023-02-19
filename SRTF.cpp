@@ -47,7 +47,7 @@ void findWaitTime(process proc[],int n,int wt[])
             //ans.push_back(ind+1);
             complete++;
             check = false;
-            f_time = t++;
+            f_time = t + 1;
             wt[ind] = f_time -(proc[ind].bt + proc[ind].art);
             if (wt[ind] < 0)
                 wt[ind] = 0;
@@ -78,7 +78,7 @@ void findAvgTime(process proc[],int n){
     int wt[n],tat[n],total_wt=0,total_tat=0;
     findWaitTime(proc,n,wt);
     findTurnAroundTime(proc,n,wt,tat);
-   // cout << " Waiting time "<< " Turn around time\n";
+   // cout << "Processes "<< " Burst time "<< " Waiting time "<< " Turn around time\n";
     for (int i = 0; i < n; i++)
     {
         total_wt = total_wt + wt[i];

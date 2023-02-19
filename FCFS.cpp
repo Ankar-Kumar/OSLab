@@ -42,7 +42,7 @@ int main() {
     cout<<"Enter total number of processes(maximum 20):";
     cin>>n;
     for (i=0;i<n;i++) {
-        cout<<"P["<<i+1<<"]:";
+       // cout<<"P["<<i+1<<"]:";
         cin>>bt[i];
     }
     wt[0]=0;

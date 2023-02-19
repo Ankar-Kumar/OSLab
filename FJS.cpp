@@ -2,6 +2,10 @@
 
 #define MAX_PROCESS 100
 using namespace std;
+double average_waiting_time;
+double total_waiting_time;
+int ind[100], tat[100],wt[100];
+
 struct Process
 {
     int pid;
@@ -9,10 +13,6 @@ struct Process
     int waiting_time;
 };
 
-// typedef struct process ;
-double average_waiting_time;
-double total_waiting_time;
-int ind[100],tat[100];
 
 int compare(Process a, Process b)
 {
@@ -22,6 +22,8 @@ void WaitingTime(Process p[], int n)
 {
     int i;
     total_waiting_time = 0;
+
+    
     p[0].waiting_time = 0;
     cout<<p[0].pid<<" "<<p[0].waiting_time<<endl;
     tat[0] = p[0].waiting_time + p[0].burst_time;
@@ -31,6 +33,17 @@ void WaitingTime(Process p[], int n)
         cout<<p[i].pid<<" "<<p[i].waiting_time<<endl;
         total_waiting_time += p[i].waiting_time;
     }
+
+
+    // wt[0]=0;
+    // cout<<p[0].pid<<" "<<wt[0]<<endl;
+    // tat[0]=p[0].burst_time;
+    // for(int i=1;i<n;i++){
+    //     wt[i]=wt[i-1]+p[i-1].burst_time;
+    //     tat[i]=wt[i]+p[i].burst_time;
+    //     cout<<p[i].pid<<" "<<wt[i]<<endl;
+    //     total_waiting_time+=wt[i];
+    // }
 }
 
 void gantt(Process proc[], int n)
@@ -90,8 +103,8 @@ int main()
     scanf("%d", &n);
     printf("Enter burst time for each process:\n");
     for(i=0; i<n; i++) {
-        printf("P[%d]: ", i+1);
-        scanf("%d", &p[i].burst_time);
+       // printf("P[%d]: ", i+1);
+        cin>>p[i].burst_time;
         p[i].pid = i+1;
     }
 

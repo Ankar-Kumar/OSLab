@@ -14,7 +14,7 @@ void solve()
     cout << "Enter process burst time\n";
     for (int i = 0; i < n; i++)
     {
-        cout << "p[" << i + 1 << "]: ";
+       // cout << "p[" << i + 1 << "]: ";
         cin >> v[i];//burst time
         tmp[i] = v[i];
         totalBurst += v[i];
