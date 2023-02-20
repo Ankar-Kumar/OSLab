@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+vector<int> ans;
 struct process{
     int pid;
     int bt;
@@ -16,26 +16,26 @@ void findWaitTime(process proc[],int n,int wt[])
     int complete = 0, t = 0, mn = INT_MAX;
     int ind = 0, f_time;
     bool check = false;
-    vector<int>ans;
+    
     while (complete < n)
     {
         for (int j = 0; j < n; j++)
         {
+            
             if ((proc[j].art <= t) && (rt[j] < mn) && rt[j] > 0)
             {
-                //ans.push_back(j+1);
+                //ans.push_back(proc[ind].pid);
                 mn = rt[j];
                 ind = j;
                 check = true;
             }
         }
-
         if (check == false)
         {
             t++;
             continue;
         }
-
+        ans.push_back(proc[ind].pid); //last added   
         rt[ind]--;
         mn = rt[ind];
 
@@ -44,7 +44,7 @@ void findWaitTime(process proc[],int n,int wt[])
 
         if (rt[ind] == 0)
         {
-            //ans.push_back(ind+1);
+           
             complete++;
             check = false;
             f_time = t + 1;
@@ -54,11 +54,8 @@ void findWaitTime(process proc[],int n,int wt[])
         }
         t++;
     }
-    // for(auto x:ans){
-    //     cout<<x<<" ";
-    // }
-    // cout<<endl;
-    // cout<<endl;
+
+    
 }
 
 void findTurnAroundTime(process proc[],int n,int wt[],int tat[])
@@ -68,10 +65,44 @@ void findTurnAroundTime(process proc[],int n,int wt[],int tat[])
         tat[i]=proc[i].bt+wt[i];
     }
 }
-void gantt_chart(process proc[],int n,int bt[],int art[])
+void gantt_chart()
 {
+    vector<int> tot, tc;
+    int c = 1;
+    tot.push_back(ans[0]);
+    tc.push_back(0);
+    // ind++;
+    for (int i = 1; i < ans.size(); i++)
+    {
+        if (ans[i] == ans[i - 1])
+        {
+            c++;
+            continue;
+        }
+        else
+        {
+            tc.push_back(c);
+            tot.push_back(ans[i]);
+            // ind++;
+            c = 1;
+        }
+    }
+    tc.push_back(c);
+    cout<<"  ";
+    for (int i = 0; i < tot.size(); i++)
+    {
+        cout << "p" << tot[i] << "    ";
+    }
+    cout << endl;
+    cout << 0 << "   ";
+    for (int i = 1; i < tc.size(); i++)
+    {
+        tc[i] += tc[i - 1];
+        cout << tc[i] << "     ";
+    }
 
-
+    cout << endl;
+   
 }
 void findAvgTime(process proc[],int n){
 
@@ -83,18 +114,18 @@ void findAvgTime(process proc[],int n){
     {
         total_wt = total_wt + wt[i];
         total_tat = total_tat + tat[i];
-        cout <<wt[i]<< "\t\t " << tat[i] << endl;
+        cout <<proc[i].pid<<" "<<wt[i]<< "\t\t " << tat[i] << endl;
     }
     cout <<"\nAverage waiting time = "<< total_wt/(float)n<<"\n";
     cout <<"\nAverage turn around time = "<< total_tat/(float)n<<"\n";
-
-//    gantt_chart(proc,n,bt,art);
+    cout<<"GANTT CHART   "<<endl;
+   gantt_chart();
 
 }
 int main(){
     int n,i,j;
     freopen("srtf.txt","r",stdin);
-    cout<<"Enter total number of processor  ";
+   // cout<<"Enter total number of processor  ";
     cin>>n;
     process proc[n+1];
     for(i=0;i<n;i++){
