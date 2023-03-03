@@ -6,6 +6,7 @@ vector<int>ans;
 int allocation[100][100],available[100],request[100],need[100][100],mex[100][100],instance[100];
 bool isSafety()
 {
+    ans.clear();
     vector<int>finish(p,0);
     vector<int>work(available,available+r);
 //    for(i=0;i<r;i++) cout<<work[i]<<" ";
@@ -44,12 +45,21 @@ bool isSafety()
 
 bool requestResource(int pid)
 {
+//    cout<<endl<<endl;
+//    for(i=0;i<p;i++){
+//        for(int j=0;j<r;j++){
+//            cout<<allocation[i][j]<<" ";
+//        }cout<<endl;
+//    }
+//    cout<<endl<<endl;
     for(i=0; i<r; i++)
     {
+        //cout<<request[i]<<" ";
         available[i]-=request[i];
         allocation[pid][i]+=request[i];
         need[pid][i]-=request[i];
     }
+
     if(isSafety())
     {
         return true;
