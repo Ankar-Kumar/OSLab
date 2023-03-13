@@ -4,38 +4,7 @@ using namespace std;
 int p,r,i,j;
 vector<int>ans;
 
-int allocation[100][100],available[100],request[100],need[100][100],mex[100][100],instance[100];
-void findavail()
-{
-    for(i=0; i<r; i++)
-    {
-        int sum=0;
-        for(j=0; j<p; j++)
-        {
-            sum+=allocation[j][i];
-        }
-        available[i]=instance[i]-sum;
-    }
-//    for(i=0;i<r;i++) cout<<available[i]<<" ";
-//    cout<<endl<<endl;
-}
-void findNeed()
-{
-    for(i=0; i<p; i++)
-    {
-        for(j=0; j<r; j++)
-        {
-            need[i][j]=mex[i][j]-allocation[i][j];
-        }
-    }
-
-//    for(i=0;i<p;i++){
-//        for(j=0;j<r;j++){
-//            cout<<need[i][j]<<" ";
-//        }cout<<endl;
-//    }
-//    cout<<endl<<endl;
-}
+int allocation[100][100],available[100],request[100][100],need[100][100],mex[100][100],instance[100];
 
 bool isSafety()
 {
@@ -53,7 +22,7 @@ bool isSafety()
             {
                 for(j=0; j<r; j++)
                 {
-                    if(need[i][j]>work[j]) break;
+                    if(request[i][j]>work[j]) break;
                 }
                 if(j==r)
                 {
@@ -75,10 +44,10 @@ bool isSafety()
 }
 int main()
 {
-    freopen("safety.txt","r",stdin);
+    freopen("deadlock.txt","r",stdin);
     cin>>p>>r;
     int i,j,k,c=0;
-    for(i=0; i<r; i++) cin>>instance[i];
+    for(i=0; i<r; i++) cin>>available[i];
     for(i=0; i<p; i++)
     {
         for(j=0; j<r; j++)
@@ -90,12 +59,10 @@ int main()
     {
         for(j=0; j<r; j++)
         {
-            cin>>mex[i][j];
+            cin>>request[i][j];
         }
     }
 
-    findavail();
-    findNeed();
     if(isSafety())
     {
         cout<<"there is  no deadlock"<<endl;
