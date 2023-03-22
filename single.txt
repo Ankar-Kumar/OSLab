@@ -1,0 +1,8 @@
+5 5
+r1 t0 t1
+r2 t3 t0
+r3 t1 t4
+r4 t1 t2
+r5 t2 t3
+r5 t1 t4
+
