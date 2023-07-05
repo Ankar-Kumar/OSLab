@@ -7,7 +7,7 @@ int main()
     cin>>proc;
     vector<int>first(proc),cmplt(proc,-1);
     for(i=0; i<proc; i++)
-        cin>>first[i];
+        cin>>first[i];   //frame size
     int siz,tmp=proc;
     while(tmp--)
     {
@@ -16,9 +16,9 @@ int main()
        // sort(first.rbegin(),first.rend());
         for(i=0; i<proc; i++)
         {
-            if(first[i]>=k)
+            if(first[i]>=siz)  // sb theke maximum size e store krbo
             {
-                k=first[i];
+                siz=first[i];
                 ind=i;
             }
         }

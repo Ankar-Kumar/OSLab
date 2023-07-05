@@ -14,9 +14,9 @@ int main()
         cin>>siz;
         int ind=-1,k=siz,prev=INT_MAX;
        // sort(first.rbegin(),first.rend());
-        for(i=0; i<proc; i++)
+        for(i=0; i<proc; i++)   //  minimum highest e store kora lagbe
         {
-            if(first[i]>=siz and prev>=first[i])
+            if (first[i] >= siz and first[i] <= prev)  // minimum prev change
             {
                 prev=first[i];
                 ind=i;

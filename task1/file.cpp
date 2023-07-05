@@ -64,13 +64,16 @@ void dirFile()
     struct dirent *d;
     DIR *dr;
     dr=opendir(".");
-    if(dr!=NULL){
+    if ((d = readdir(dr)) != NULL)
+    {
         cout<<"folders are "<<endl;
         while((d=readdir(dr))!=NULL){
             cout<<d->d_name<<endl;            
         }
         closedir(dr);
-    }else{
+    }
+    else
+    {
         cout<<"no file"<<endl;
     }
 }
@@ -115,3 +118,4 @@ int main(int argc, char **argv)
     }
 }
 //  F:/3Y2S/OS/LAB/task1/l2.txt      F:/3Y2S/OS/LAB/task1/copy/l2.txt
+// F:\3Y2S\OS\LAB\task1\losser.txt

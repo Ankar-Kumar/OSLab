@@ -1,77 +1,97 @@
 #include<bits/stdc++.h>
 using namespace std;
-int i,j,k;
-
-int n=17,m=6,fault=0;
-int frame[17],modify[6];
-void enhance(int siz)
+int i,j,fault=0;
+void enhanced(vector<int>&pages,int frame,vector<int>&referenc)
 {
-    vector<int>tmp;
     map<int,string>mp;
-
-    for(i=0; i<n; i++)
-    {
-        string s="10";
-        int val=frame[i];
-        if(tmp.size()<siz)
-        {
-            auto ind=find(tmp.begin(),tmp.end(),val);
-            if(ind==tmp.end())
-            {
+    map<int,int>pos;
+    set<int>tmp;
+    for(i=0;i<pages.size();i++){
+        int val= pages[i];
+        pos[val]=i;
+        if(tmp.size()<frame){
+            if(tmp.find(val)==tmp.end()){
                 fault++;
-                tmp.push_back(val);
-                for(auto f:modify)
-                {
-                    if(f==val)
-                    {
-                        s="11";
+                tmp.insert(val);
+                bool flag=0;
+                for(auto x:referenc){
+                    if(x==i){
+                        falg=1;
+                        mp[val]="11";
+                        break;
                     }
                 }
-                mp[val]=s;
+                if(!flag){
+                    mp[val]="10";
+                }
             }
-
-        }
-        else
-        {
-            auto ind=find(tmp.begin(),tmp.end(),val);
-            if(ind==tmp.end())
-            {
+            else{
+                bool flag=0;
+                for(auto x:referenc){
+                    if(x==i){
+                        falg=1;
+                        mp[val]="11";
+                        break;
+                    }
+                }
+                if(!flag){
+                    mp[val]="10";
+                }
+            }
+        }else{
+            if(tmp.find(val)==tmp.end()){
                 fault++;
-                string s1="10";
-                for(auto f:modify)
-                {
-                    if(f==val)
-                    {
-                        s1="11";
+                int cnt=0;
+                for(auto str:mp){
+                    string s=str.second;
+                    if(s[0]=='0') {
+
                     }
                 }
-                mp[val]=s1;
+
+
+
+
+                bool flag=0;
+                for(auto x:referenc){
+                    if(x==i){
+                        falg=1;
+                        mp[val]="11";
+                        break;
+                    }
+                }
+                if(!flag){
+                    mp[val]="10";
+                }
             }
-            else
-            {
-                string s1="10";
-                for(auto f:modify)
-                {
-                    if(f==val)
-                    {
-                        s1="11";
+            else{
+                bool flag=0;
+                for(auto x:referenc){
+                    if(x==i){
+                        falg=1;
+                        mp[val]="11";
+                        break;
                     }
                 }
-                mp[val]=s1;
+                if(!flag){
+                    mp[val]="10";
+                }
             }
         }
     }
 }
 int main()
 {
-    freopen("enhance.txt","r",stdin);
-
-
-    for(i=0; i<n; i++) cin>>frame[i];
-    for(i=0; i<m; i++) cin>>modify[i];
-    int siz;
-    cin>>siz;
-
-    enhance(siz);
-
+   int n;
+   freopen("enhance.txt","r",stdin);
+   cin>>n>>m;
+   vector<int>pages(n),referenc(m);
+   for(i=0;i<n;i++)
+        cin>>pages[i];
+   for(i=0;i<n;i++)
+        cin>>referenc[i];
+   int frame;
+   cin>>frame;
+   enhanced(pages,frame,referenc);
 }
+

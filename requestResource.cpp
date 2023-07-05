@@ -107,6 +107,7 @@ int main()
                 cin>>pid;
                 for(i=0; i<r; i++) cin>>request[i];
                 bool valid=true;
+
                 for(i=0; i<r; i++)
                 {
                     if(request[i]>need[pid][i])
@@ -116,6 +117,7 @@ int main()
                     }
                 }
                 if(valid==false) continue;
+
                 for(i=0; i<r; i++)
                 {
                     if(request[i]>available[i])
@@ -125,6 +127,7 @@ int main()
                     }
                 }
                 if(valid==false) continue;
+                
                 if(requestResource(pid))
                 {
                     cout<<"The Resources has been allocated.\n";

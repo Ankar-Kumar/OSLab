@@ -26,9 +26,9 @@ int main()
     vector< pair<int, pair<int, int> > >tmp;
     while(cin>>a>>b>>c){
 
-        int x=a[1]-48;
-        int y=b[1]-48;
-        int z=c[1]-48;
+        int x=a[1]-48;  //rosource
+        int y=b[1]-48;  // thread from
+        int z=c[1]-48;  // thread to
         tmp.push_back(make_pair(x,make_pair(y,z)));
     }
 //    for(auto x:tmp){

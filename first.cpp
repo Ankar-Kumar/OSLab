@@ -13,14 +13,14 @@ int main()
     {
         cin>>siz;
         int c=0;
-        for(i=0; i<proc; i++)
+        for(i=0; i<proc; i++) 
         {
-            if(first[i]>=siz)
+            if(first[i]>=siz)  //immediate boro te allocate krbo
             {
                 cout<<"allocated into "<<first[i]<<endl;
                 c=1;
-                first[i]=-1;
-                cmplt[i]=j++;
+                first[i]=-1;  // frame er size ta disable krte hbe
+                cmplt[i]=j++;  //  koto number hole e koto number process ke allocate krchi store
                 break;
             }
         }

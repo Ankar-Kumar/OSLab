@@ -9,20 +9,20 @@ struct process{
 
 void findWaitTime(process proc[],int n,int wt[])
 {
-    int rt[n];
+    int rt[n];///remaining time
     for (int i = 0; i < n; i++)
         rt[i] = proc[i].bt;
 
     int complete = 0, t = 0, mn = INT_MAX;
     int ind = 0, f_time;
     bool check = false;
-    
+
     while (complete < n)
     {
         for (int j = 0; j < n; j++)
         {
-            
-            if ((proc[j].art <= t) && (rt[j] < mn) && rt[j] > 0)
+
+            if ((proc[j].art <= t) && rt[j] < mn && rt[j] > 0)
             {
                 //ans.push_back(proc[ind].pid);
                 mn = rt[j];
@@ -35,8 +35,8 @@ void findWaitTime(process proc[],int n,int wt[])
             t++;
             continue;
         }
-        ans.push_back(proc[ind].pid); //last added   
-        rt[ind]--;
+        ans.push_back(proc[ind].pid); //last added   // kun process access pabe seta push krbo
+        rt[ind]--; /// remaining time 1 decrease krbo
         mn = rt[ind];
 
         if (mn == 0)
@@ -44,9 +44,9 @@ void findWaitTime(process proc[],int n,int wt[])
 
         if (rt[ind] == 0)
         {
-           
+
             complete++;
-            check = false;
+            // check = false;
             f_time = t + 1;
             wt[ind] = f_time -(proc[ind].bt + proc[ind].art);
             if (wt[ind] < 0)
@@ -55,7 +55,7 @@ void findWaitTime(process proc[],int n,int wt[])
         t++;
     }
 
-    
+
 }
 
 void findTurnAroundTime(process proc[],int n,int wt[],int tat[])
@@ -67,10 +67,10 @@ void findTurnAroundTime(process proc[],int n,int wt[],int tat[])
 }
 void gantt_chart()
 {
-    vector<int> tot, tc;
+    vector<int>id, time;
     int c = 1;
-    tot.push_back(ans[0]);
-    tc.push_back(0);
+    id.push_back(ans[0]);
+    time.push_back(0);
     // ind++;
     for (int i = 1; i < ans.size(); i++)
     {
@@ -81,28 +81,28 @@ void gantt_chart()
         }
         else
         {
-            tc.push_back(c);
-            tot.push_back(ans[i]);
+            time.push_back(c);
+            id.push_back(ans[i]);
             // ind++;
             c = 1;
         }
     }
-    tc.push_back(c);
+    time.push_back(c);
     cout<<"  ";
-    for (int i = 0; i < tot.size(); i++)
+    for (int i = 0; i < id.size(); i++)
     {
-        cout << "p" << tot[i] << "    ";
+        cout << "p" << id[i] << "    ";
     }
     cout << endl;
     cout << 0 << "   ";
-    for (int i = 1; i < tc.size(); i++)
+    for (int i = 1; i < time.size(); i++)
     {
-        tc[i] += tc[i - 1];
-        cout << tc[i] << "     ";
+        time[i] += time[i - 1];
+        cout << time[i] << "     ";
     }
 
     cout << endl;
-   
+
 }
 void findAvgTime(process proc[],int n){
 

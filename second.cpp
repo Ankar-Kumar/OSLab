@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int i,j,k,index_store=0;
+int i,j,k,index=0;
 int fault=0;
 
 
@@ -20,9 +20,9 @@ void secondChance(vector<int> &page,int frame)
                 mp[val]=0;
                 tmp.push_back(val);
                 fault++;
-                for(auto x:tmp){
-                    cout<<x<<" ";
-                }cout<<endl;
+                // for(auto x:tmp){
+                //     cout<<x<<" ";
+                // }cout<<endl;
             }
             else
             {
@@ -36,8 +36,8 @@ void secondChance(vector<int> &page,int frame)
             if(ck ==tmp.end())
             {
                 fault++;
-                int cc=0,one=0;
-                for(k=index_store;;)
+                int flag=0;
+                for(k=index;;)
                 {
                     for(auto &it:mp)
                     {
@@ -45,23 +45,19 @@ void secondChance(vector<int> &page,int frame)
                         {
                             tmp[k]=val;
                             mp[val]=0;
-                            cc=frame;
-                            //k=(k+1)%frame;
+                            flag=1;
                             break;
                         }else if(tmp[k]==it.first and it.second==1){
                             it.second=0;
-                           // cout<<1;
-//                            one++;
-
                         }
                     }
                     k=(k+1)%frame;
-                    if(cc==frame) break;
+                    if(flag) break;
                 }
-                for(auto x:tmp){
-                    cout<<x<<" ";
-                }cout<<endl;
-                index_store=k;
+                // for(auto x:tmp){
+                //     cout<<x<<" ";
+                // }cout<<endl;
+                index=k;
 
 
             }else{

@@ -21,9 +21,10 @@ void FIFO(vector<int>&pages,int siz)
         {
             if(tmp.find(val)==tmp.end())   //not found
             {
-                int pp=ind.front();
+                int prev=ind.front();
                 ind.pop();
-                tmp.erase(pp);
+                tmp.erase(prev);
+
                 ind.push(val);
                 tmp.insert(val);
                 fault++;
@@ -34,8 +35,8 @@ void FIFO(vector<int>&pages,int siz)
 }
 int main()
 {
-    vector<int>a= {7,0,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
-
+    vector<int>a= {7,0,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};//15
+         //  {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2} 7
     while(1){
     int siz;
     cout<<"FRAME SIZE ";

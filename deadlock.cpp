@@ -30,7 +30,8 @@ bool isSafety()
                     {
                         work[j]+=allocation[i][j];
                     }
-                    ans.push_back(i);
+
+                    ans.push_back(i);   // process store in vector
                     k++;
                     finish[i]=1;
                     flag=true;

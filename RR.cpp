@@ -30,8 +30,8 @@ void solve()
             if (v[i] <= t_quantum && v[i] > 0)
             {
                 ans.push_back(i + 1);
-                wt[i] += b - check[i];
-                b += v[i];
+                wt[i] += b - check[i]; // total burst time theke start burst time bad
+                b += v[i]; // burst time added
                 v[i] = 0;
             }
             else if (v[i] > t_quantum)
@@ -39,7 +39,7 @@ void solve()
                 ans.push_back(i + 1);
                 wt[i] += b - check[i];
                 b += t_quantum;
-                check[i] = b;
+                check[i] = b; //first start burst time store
                 v[i] -= t_quantum;
             }
         }
@@ -57,10 +57,10 @@ void solve()
 
     for (int i = 0; i < ans.size(); i++)
     {
-        for (int j = 0; j < min(4, tmp[ans[i] - 1]) - 1; j++)
+        for (int j = 0; j < min(t_quantum, tmp[ans[i] - 1]) - 1; j++)
             cout << " ";
         cout << "p" << ans[i];
-        for (int j = 0; j < min(4, tmp[ans[i] - 1]) - 1; j++)
+        for (int j = 0; j < min(t_quantum, tmp[ans[i] - 1]) - 1; j++)
             cout << " ";
         cout << "|";
     }
@@ -69,9 +69,9 @@ void solve()
     int ans2 = 0;
     for (int i = 0; i < ans.size(); i++)
     {
-        for (int j = 0; j < min(4, tmp[ans[i] - 1]); j++)
+        for (int j = 0; j < min(t_quantum, tmp[ans[i] - 1]); j++)
             cout << "  ";
-        ans2 += min(4, tmp[ans[i] - 1]);
+        ans2 += min(t_quantum, tmp[ans[i] - 1]);
         if (ans2 > 9)
             cout << "\b";
         cout << ans2;
