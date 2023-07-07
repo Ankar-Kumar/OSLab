@@ -31,12 +31,12 @@ void FIFO(vector<int>&pages,int siz)
             }
         }
     }
-    cout<<fault;
+    cout<<fault<<endl;
 }
 int main()
 {
-    vector<int>a= {7,0,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};//15
-         //  {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2} 7
+    // vector<int>a= {7,0,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};//15
+     vector<int>a=  {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2} ;//10
     while(1){
     int siz;
     cout<<"FRAME SIZE ";

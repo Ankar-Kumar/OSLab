@@ -88,10 +88,10 @@ void gantt_chart()
         }
     }
     time.push_back(c);
-    cout<<"  ";
+    cout<<"  ";//2
     for (int i = 0; i < id.size(); i++)
     {
-        cout << "p" << id[i] << "    ";
+        cout << "p" << id[i] << "    ";//4
     }
     cout << endl;
     cout << 0 << "   ";

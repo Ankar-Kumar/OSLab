@@ -23,17 +23,18 @@ int main()
             }
         }
         if(ind==-1)
-            cout<<"no allocation process size "<<siz<<endl;
+            cout<<"no allocation process size "<<k<<endl;
         else{
-            cout<<"allocated into "<<k<<endl;
+            cout<<"allocated into "<<siz<<endl;
                 cmplt[ind]=j++;
                 first[ind]=-1;
                // break;
         }
     }
+    i=1;
     for(auto x:cmplt)
     {
-        cout<<x<<" ";
+        cout<<i++<<" -> "<<x<<" ";
     }
     cout<<endl;
 }
